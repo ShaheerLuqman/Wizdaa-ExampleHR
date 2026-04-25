@@ -24,3 +24,15 @@ pnpm-debug.log*
 *.tsbuildinfo
 frontend/app/*.js
 frontend/app/*.js.map
+frontend/app/*.d.ts
+
+# sqlite / prisma local databases
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# generated script build artifacts
+scripts/*.js
+scripts/*.js.map
+scripts/*.d.ts

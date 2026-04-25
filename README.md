@@ -6,6 +6,12 @@ NestJS + Prisma backend with a Next.js frontend console for testing time-off flo
 
 - GitHub: [https://github.com/ShaheerLuqman/Wizdaa-ExampleHR](https://github.com/ShaheerLuqman/Wizdaa-ExampleHR)
 
+## Frontend Sample
+
+- Screenshot reference: [`FE-sample.png`](./FE-sample.png)
+
+![Frontend Sample](./FE-sample.png)
+
 ## Deliverables Checklist
 
 - [x] **TRD provided**: [`TRD.md`](./TRD.md)
