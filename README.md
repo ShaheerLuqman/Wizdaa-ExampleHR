@@ -6,10 +6,6 @@ NestJS + Prisma backend with a Next.js frontend console for testing time-off flo
 
 - GitHub: [https://github.com/ShaheerLuqman/Wizdaa-ExampleHR](https://github.com/ShaheerLuqman/Wizdaa-ExampleHR)
 
-## Frontend Sample
-
-- Screenshot reference: [`FE-sample.png`](./FE-sample.png)
-
 ![Frontend Sample](./FE-sample.png)
 
 ## Deliverables Checklist
@@ -99,6 +95,29 @@ Copy or edit `.env` as needed. Common values:
 - The frontend includes an API console for triggering all backend endpoints.
 - Request logs are emitted by backend middleware to help verify requests hit BE.
 - If you see `EADDRINUSE`, stop stale local processes or rerun `npm run start:all`.
+
+## How to Use the Frontend Console
+
+1. Start all services:
+   ```bash
+   npm run start:all
+   ```
+2. Open the frontend at `http://localhost:3001`.
+3. In **Auth / Tenant Context**:
+   - set `tenantId` (for example `tenant-a`)
+   - click **Generate Test JWT**
+4. Seed balance data first using **Batch Sync** (required for request creation/approval flows).
+5. Run core flow:
+   - **Create Request** -> expect `PENDING`
+   - **Approve Request** -> expect `APPROVED` (in success mode)
+   - verify updated value in **Balances**
+6. Test resilience flow:
+   - set HCM mode to `transient_error`
+   - approve request -> expect `FAILED_SYNC`
+   - switch mode back to `success`
+   - run **Outbox Process** -> expect recovery to `APPROVED`
+
+For full FE behavior and scenario design details, refer to [`fe.md`](./fe.md).
 
 ## Test Cases and Proof of Coverage
 
