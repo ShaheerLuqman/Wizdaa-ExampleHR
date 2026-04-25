@@ -54,10 +54,6 @@ const batchPayload = {
 };
 
 export default function Home() {
-  const [apiBaseUrl, setApiBaseUrl] = useLocalStorage(
-    'api-base-url',
-    defaultApiBaseUrl,
-  );
   const [tenantId, setTenantId] = useLocalStorage('tenant-id', 'tenant-a');
   const [subject, setSubject] = useLocalStorage('subject', 'manager-1');
   const [token, setToken] = useLocalStorage('jwt-token', '');
@@ -136,7 +132,7 @@ export default function Home() {
 
     const correlationId = correlationOverride || crypto.randomUUID();
     const path = buildPath(config.path, config.hcmMode, config.useQueryMode);
-    const url = `${apiBaseUrl.replace(/\/$/, '')}${path}`;
+    const url = `${defaultApiBaseUrl.replace(/\/$/, '')}${path}`;
     const headers: Record<string, string> = {
       authorization: `Bearer ${effectiveToken}`,
       'content-type': 'application/json',
@@ -272,11 +268,6 @@ export default function Home() {
             <h2 className={styles.bannerTitle}>Auth / Tenant Context</h2>
             <div className={styles.grid}>
               <TextField
-                label="API Base URL"
-                value={apiBaseUrl}
-                onChange={setApiBaseUrl}
-              />
-              <TextField
                 label="Tenant ID"
                 value={tenantId}
                 onChange={handleTenantChange}
@@ -301,10 +292,11 @@ export default function Home() {
               </button>
               <span className={styles.pill}>Active tenant: {tenantId}</span>
             </div>
-            <p className={styles.warning}>
+            <details className={styles.securityNote}>
+              <summary>Security note</summary>
               Unsigned JWTs are generated client-side and stored locally for
               testing only. This is not a secure authentication mechanism.
-            </p>
+            </details>
           </section>
 
           <Section

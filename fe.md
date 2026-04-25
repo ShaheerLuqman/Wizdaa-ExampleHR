@@ -25,7 +25,7 @@ This FE is a functional test console, not a polished end-user product.
 
 ## Environment Config
 - `NEXT_PUBLIC_API_BASE_URL` (e.g. `http://localhost:3000`)
-- Base URL comes from env by default, with optional per-request override in UI for debugging.
+- Base URL is predefined from env only (no runtime override in the UI).
 - Frontend dev server runs on `http://localhost:3001`.
 - Backend runs on `http://localhost:3000` and must explicitly allowlist FE origin via CORS.
 

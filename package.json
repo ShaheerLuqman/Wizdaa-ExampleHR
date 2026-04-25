@@ -58,6 +58,7 @@
       "src/**/*.(t|j)s",
       "!src/main.ts"
     ],
+    "maxWorkers": 1,
     "coverageDirectory": "coverage",
     "testEnvironment": "node"
   }

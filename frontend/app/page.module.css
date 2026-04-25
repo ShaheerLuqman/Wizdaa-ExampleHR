@@ -354,6 +354,23 @@
   padding: 10px;
 }
 
+.securityNote {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.88rem;
+}
+
+.securityNote summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 4px;
+}
+
 @media (max-width: 980px) {
   .workspace {
     grid-template-columns: 1fr;

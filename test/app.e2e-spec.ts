@@ -1,6 +1,7 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { execSync } from 'node:child_process';
+import { existsSync, rmSync } from 'node:fs';
 import { createServer, Server } from 'node:http';
 import { AddressInfo } from 'node:net';
 import request from 'supertest';
@@ -13,9 +14,13 @@ describe('Time-off service API', () => {
   let prisma: PrismaService;
   let hcmServer: Server;
   let retryOnceCalls = 0;
+  const testDbFileName = `test-e2e-${process.pid}.db`;
 
   beforeAll(async () => {
-    process.env.DATABASE_URL = 'file:./test.db';
+    process.env.DATABASE_URL = `file:./${testDbFileName}`;
+    if (existsSync(testDbFileName)) {
+      rmSync(testDbFileName);
+    }
 
     hcmServer = createServer((req, res) => {
       if (req.url === '/v1/hcm/time-off/debit' && req.method === 'POST') {
@@ -96,6 +101,9 @@ describe('Time-off service API', () => {
   afterAll(async () => {
     await app.close();
     await new Promise<void>((resolve) => hcmServer.close(() => resolve()));
+    if (existsSync(testDbFileName)) {
+      rmSync(testDbFileName);
+    }
   });
 
   it('creates a pending request without debiting HCM, then debits on approval', async () => {
