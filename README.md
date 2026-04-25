@@ -32,7 +32,9 @@ NestJS + Prisma backend with a Next.js frontend console for testing time-off flo
 ## Setup
 
 ```bash
+cp .env.example .env
 npm install
+npm install --prefix frontend
 npm run prisma:generate
 npm run prisma:migrate
 ```
