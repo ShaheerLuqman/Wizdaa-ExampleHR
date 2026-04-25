@@ -2,6 +2,10 @@
 
 NestJS + Prisma backend with a Next.js frontend console for testing time-off flows, HCM sync behavior, and outbox retries.
 
+## Repository
+
+- GitHub: [https://github.com/ShaheerLuqman/Wizdaa-ExampleHR](https://github.com/ShaheerLuqman/Wizdaa-ExampleHR)
+
 ## Stack
 
 - Backend: NestJS, Prisma, SQLite
@@ -79,3 +83,23 @@ Copy or edit `.env` as needed. Common values:
 - The frontend includes an API console for triggering all backend endpoints.
 - Request logs are emitted by backend middleware to help verify requests hit BE.
 - If you see `EADDRINUSE`, stop stale local processes or rerun `npm run start:all`.
+
+## Test Cases and Proof of Coverage
+
+Run coverage:
+
+```bash
+npm run test:cov
+```
+
+Latest coverage run summary:
+
+- Test suites: `9 passed, 9 total`
+- Tests: `26 passed, 26 total`
+- Statement coverage: `91.38%`
+- Line coverage: `90.78%`
+
+Coverage artifacts are generated under:
+
+- `coverage/`
+- `coverage/lcov-report/index.html` (HTML report)
