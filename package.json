@@ -1,0 +1,64 @@
+{
+  "name": "examplehr-time-off-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ExampleHR Time-Off microservice built with NestJS, Prisma, and SQLite.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:all": "powershell -ExecutionPolicy Bypass -File ./scripts/start-all.ps1",
+    "mock:hcm": "ts-node scripts/mock-hcm.ts",
+    "frontend:dev": "npm run dev --prefix frontend",
+    "frontend:build": "npm run build --prefix frontend",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy"
+  },
+  "dependencies": {
+    "@nestjs/common": "latest",
+    "@nestjs/core": "latest",
+    "@nestjs/platform-express": "latest",
+    "@prisma/client": "^6.19.3",
+    "class-transformer": "latest",
+    "class-validator": "latest",
+    "reflect-metadata": "latest",
+    "rxjs": "latest"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "latest",
+    "@nestjs/testing": "latest",
+    "@types/express": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "@types/supertest": "latest",
+    "jest": "latest",
+    "prisma": "^6.19.3",
+    "source-map-support": "latest",
+    "supertest": "latest",
+    "ts-jest": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*(\\.spec|\\.e2e-spec)\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.(t|j)s",
+      "!src/main.ts"
+    ],
+    "coverageDirectory": "coverage",
+    "testEnvironment": "node"
+  }
+}

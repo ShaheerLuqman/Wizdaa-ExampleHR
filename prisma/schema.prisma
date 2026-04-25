@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model EmployeeBalance {
+  id            String   @id @default(uuid())
+  tenantId      String
+  employeeId    String
+  locationId    String
+  availableDays Float
+  version       Int      @default(1)
+  lastSyncedAt  DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([tenantId, employeeId, locationId])
+  @@index([tenantId, employeeId])
+}
+
+model TimeOffRequest {
+  id             String   @id @default(uuid())
+  tenantId       String
+  employeeId     String
+  locationId     String
+  daysRequested  Float
+  status         String
+  idempotencyKey String   @unique
+  failureCode    String?
+  failureMessage String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  outboxEvents OutboxEvent[]
+
+  @@index([tenantId, employeeId])
+  @@index([tenantId, status])
+}
+
+model IdempotencyKey {
+  key          String   @id
+  tenantId     String
+  requestId    String?
+  responseCode Int
+  responseBody String
+  createdAt    DateTime @default(now())
+
+  @@index([tenantId])
+}
+
+model OutboxEvent {
+  id               String   @id @default(uuid())
+  tenantId         String
+  type             String
+  status           String
+  payload          String
+  attempts         Int      @default(0)
+  maxAttempts      Int      @default(5)
+  nextAttemptAt    DateTime @default(now())
+  lastErrorCode    String?
+  lastErrorMessage String?
+  requestId        String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  request TimeOffRequest? @relation(fields: [requestId], references: [id])
+
+  @@index([tenantId, status, nextAttemptAt])
+  @@index([requestId])
+}
+
+model SyncAuditLog {
+  id           String   @id @default(uuid())
+  tenantId     String
+  eventType    String
+  employeeId   String?
+  locationId   String?
+  requestId    String?
+  beforeValue  String?
+  afterValue   String?
+  details      String
+  correlationId String?
+  createdAt    DateTime @default(now())
+
+  @@index([tenantId, eventType])
+  @@index([tenantId, employeeId, locationId])
+}
