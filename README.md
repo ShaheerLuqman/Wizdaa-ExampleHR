@@ -6,6 +6,16 @@ NestJS + Prisma backend with a Next.js frontend console for testing time-off flo
 
 - GitHub: [https://github.com/ShaheerLuqman/Wizdaa-ExampleHR](https://github.com/ShaheerLuqman/Wizdaa-ExampleHR)
 
+## Deliverables Checklist
+
+- [x] **TRD provided**: [`TRD.md`](./TRD.md)
+- [x] **Code in GitHub repository**: [ShaheerLuqman/Wizdaa-ExampleHR](https://github.com/ShaheerLuqman/Wizdaa-ExampleHR)
+- [x] **Test cases and proof of coverage provided**:
+  - Test command: `npm test`
+  - Coverage command: `npm run test:cov`
+  - Coverage report artifact: `coverage/lcov-report/index.html`
+  - Latest coverage summary (end of document): [Test Cases and Proof of Coverage](#test-cases-and-proof-of-coverage)
+
 ## Stack
 
 - Backend: NestJS, Prisma, SQLite
